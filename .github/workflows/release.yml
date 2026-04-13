@@ -6,20 +6,14 @@ on:
       - 'v*'
 
 jobs:
-  publish:
+  validate:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
       - uses: actions/checkout@v4
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'
           channel: stable
-          cache: true
 
       - name: Install dependencies
         run: flutter pub get
@@ -30,10 +24,5 @@ jobs:
       - name: Test
         run: flutter test
 
-      - name: Dry run publish
-        run: flutter pub publish --dry-run
-
-      - name: Publish to pub.dev
-        run: flutter pub publish --force
-        env:
-          PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
+      # pub.dev publish is manual — run `flutter pub publish` locally after CI passes.
+      # See CLAUDE.md and SDKs/RELEASE.md for details.
