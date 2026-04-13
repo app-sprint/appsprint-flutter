@@ -85,7 +85,15 @@ The SDK doesn't talk to the API directly — it delegates to the native plugins 
 
 - `ci.yml` — Analyze + test + dry-run publish on push to main and PRs
 - `discord-notify.yml` — Post commit info to Discord
-- `release.yml` — Analyze, test, publish to pub.dev on `v*` tags
+- `release.yml` — Analyze, test, publish to pub.dev on `v*` tags (manual — no OIDC support)
+
+### pub.dev Publishing
+
+- **Package:** `appsprint_flutter` on pub.dev
+- **Publisher:** `appsprint.app` (verified domain)
+- **Auth:** Manual `flutter pub publish` — pub.dev does not support OIDC yet
+- **CI:** `release.yml` runs analysis + tests but publish step requires manual auth
+- Consumers install via: `appsprint_flutter: ^x.y.z` in `pubspec.yaml`
 
 ---
 
